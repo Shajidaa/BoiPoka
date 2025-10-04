@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { useLoaderData, useParams } from 'react-router';
 
-const Book = ({singleBook}) => {
-    // console.log(singleBook);
-    const{bookName,author,bookId,image,rating,tags}=singleBook;
+const BookDetails = () => {
+    const {id}=useParams()
+      const bookConvertId = Number(id);
+      const data=useLoaderData();
+
+    const singleBook=data.find( book=>book.bookId === bookConvertId)
+       const{bookName,author,bookId,image,rating,tags}=singleBook;
+    
     return (
-      <Link to={`/bookDetails/${bookId}`}>
       <div className="card bg-base-100  border
                 border-gray-300  shadow-xl p-5
                  flex flex-col justify-center items-center ">
@@ -22,14 +26,18 @@ const Book = ({singleBook}) => {
     <p className='font-medium text-base text-[#131313] '>{author}</p>
     <hr className='border-dashed' />
     <div className="card-actions flex justify-between items-center ">
-      <div className="badge badge-outline cursor-pointer ">{tags[0]}</div>
-      <div className="badge "> <p>{rating} <span>⭐</span> </p> </div>
+     <div className='flex justify-between items-center  gap-2'>
+        <button className='btn btn-outline'>
+            Read
+        </button>
+        <button className='btn btn-secondary'>
+           Wishlist
+        </button>
+     </div>
     </div>
   </div>
      </div>
-      </Link>
-     
     );
 };
 
-export default Book;
+export default BookDetails;
