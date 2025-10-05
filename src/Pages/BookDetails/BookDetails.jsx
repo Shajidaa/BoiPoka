@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import { addToStoredDB } from '../../Utility/addtoDB';
 
 const BookDetails = () => {
     const {id}=useParams()
@@ -9,6 +10,14 @@ const BookDetails = () => {
     const singleBook=data.find( book=>book.bookId === bookConvertId)
        const{bookName,author,bookId,image,rating,tags}=singleBook;
     
+const handleMarkAsRead=id=>{
+  addToStoredDB(id)
+  
+}
+
+
+
+
     return (
       <div className="card bg-base-100  border
                 border-gray-300  shadow-xl p-5
@@ -27,7 +36,8 @@ const BookDetails = () => {
     <hr className='border-dashed' />
     <div className="card-actions flex justify-between items-center ">
      <div className='flex justify-between items-center  gap-2'>
-        <button className='btn btn-outline'>
+        <button onClick={()=>handleMarkAsRead (bookId)}
+         className='btn btn-outline'>
             Read
         </button>
         <button className='btn btn-secondary'>
