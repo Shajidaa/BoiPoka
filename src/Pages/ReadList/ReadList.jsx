@@ -6,6 +6,7 @@ import { getStoreBook } from '../../Utility/addtoDB';
 
 const ReadList = () => {
     const [read,setRead]=useState([]);
+    const [sort,setSort]=useState('');
     // console.log(read);
     
     const data=useLoaderData()
@@ -23,15 +24,26 @@ const ReadList = () => {
         //  console.log(myReadList)
     },[data])
 
-      
+      const handleSort=(type)=>{
+        setSort(type)
+        if (type === "pages") {
+          const sortedByPage=
+          [...read].sort((a,b)=>a.totalPages-b.totalPages)
+          setRead(sortedByPage)
+        }    if (type === "ratings") {
+          const sortedByPage=
+          [...read].sort((a,b)=>a.rating-b.rating)
+          setRead(sortedByPage)
+        }
+      }
     
     return (
         <Tabs>
           <div className="dropdown dropdown-hover">
   <div tabIndex={0} role="button" className="btn m-1">Sort by</div>
   <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-    <li><a>Pages</a></li>
-    <li><a>Ratings</a></li>
+    <li><a onClick={()=>handleSort("pages")}>Pages</a></li>
+    <li><a onClick={()=>handleSort("ratings")}>Ratings</a></li>
   </ul>
 </div>
     <TabList>
@@ -56,11 +68,9 @@ const ReadList = () => {
     {singleBook.bookName}
       
     </h2>
+    <p>pages:{singleBook.totalPages}</p>
     <p className='font-medium text-base text-[#131313] '>{singleBook.author}</p>
-    <hr className='border-dashed' />
-    <div className="card-actions flex justify-between items-center ">
-    
-    </div>
+    <p>{singleBook.rating}</p>
   </div>
      </div>
 
