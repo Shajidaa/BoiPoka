@@ -8,7 +8,7 @@ const BookDetails = () => {
       const data=useLoaderData();
 
     const singleBook=data.find( book=>book.bookId === bookConvertId)
-       const{bookName,author,bookId,image,rating,tags}=singleBook;
+       const{bookName,author,bookId,image}=singleBook;
     
 const handleMarkAsRead=id=>{
   addToStoredDB(id)
@@ -40,7 +40,8 @@ const handleMarkAsRead=id=>{
          className='btn btn-outline'>
             Read
         </button>
-        <button className='btn btn-secondary'>
+        <button 
+         className='btn btn-secondary'>
            Wishlist
         </button>
      </div>
