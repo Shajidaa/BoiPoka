@@ -20,4 +20,17 @@ const addToStoredDB=(key,id)=>{
     }
 }
 
-export {addToStoredDB,getStoreBook}
+const deleteStoreBook=(key,id)=>{
+    console.log(key,id);
+    
+    const storedBookData=getStoreBook(key)
+
+   const updateList=storedBookData.filter(p=>p !== id)
+   console.log(updateList);
+   
+   localStorage.setItem(key,JSON.stringify(updateList))
+    
+}
+
+
+export {addToStoredDB,getStoreBook,deleteStoreBook}
