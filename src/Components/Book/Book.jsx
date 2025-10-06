@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const Book = ({singleBook}) => {
     // console.log(singleBook);
-    const{bookName,author,bookId,image,rating,tags}=singleBook;
+    const{bookName,author,bookId,image,rating,tags,price}=singleBook;
     return (
       <Link to={`/bookDetails/${bookId}`}>
       <div className="card bg-base-100  border
@@ -21,6 +21,7 @@ const Book = ({singleBook}) => {
     </h2>
     <p className='font-medium text-base text-[#131313] '>{author}</p>
     <hr className='border-dashed' />
+     <p className='font-semibold text-xl text-gray-600'>Price : $ <span>{price}</span> </p>
     <div className="card-actions flex justify-between items-center ">
       <div className="badge badge-outline cursor-pointer ">{tags[0]}</div>
       <div className="badge "> <p>{rating} <span>⭐</span> </p> </div>

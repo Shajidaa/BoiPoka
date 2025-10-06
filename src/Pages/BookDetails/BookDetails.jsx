@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import { addToStoredDB } from '../../Utility/addtoDB';
+import { BookCheck, Heart } from 'lucide-react';
 
 const BookDetails = () => {
     const {id}=useParams()
@@ -8,13 +9,17 @@ const BookDetails = () => {
       const data=useLoaderData();
 
     const singleBook=data.find( book=>book.bookId === bookConvertId)
-       const{bookName,author,bookId,image}=singleBook;
+       const{bookName,author,bookId,image,price}=singleBook;
     
-const handleMarkAsRead=id=>{
-  addToStoredDB(id)
+const handleMarkAsRead=(id)=>{
   
-}
+  addToStoredDB("readList",id)
 
+ 
+};
+const handleAsWishList=id=>{
+  addToStoredDB("wishList",id)
+}
 
 
 
@@ -34,15 +39,17 @@ const handleMarkAsRead=id=>{
     </h2>
     <p className='font-medium text-base text-[#131313] '>{author}</p>
     <hr className='border-dashed' />
+      <p className='font-semibold text-xl text-gray-600'>Price : $ <span>{price}</span> </p>
     <div className="card-actions flex justify-between items-center ">
      <div className='flex justify-between items-center  gap-2'>
+
         <button onClick={()=>handleMarkAsRead (bookId)}
          className='btn btn-outline'>
-            Read
+            Read <BookCheck />
         </button>
-        <button 
+        <button onClick={()=>handleAsWishList(bookId)}
          className='btn btn-secondary'>
-           Wishlist
+           Wishlist <Heart />
         </button>
      </div>
     </div>
@@ -52,3 +59,27 @@ const handleMarkAsRead=id=>{
 };
 
 export default BookDetails;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

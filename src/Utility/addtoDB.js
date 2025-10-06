@@ -1,22 +1,22 @@
-const getStoreBook=()=>{
-    const storedBookStr=localStorage.getItem('readList')
-    if (storedBookStr) {
-        const storedBookData=JSON.parse(storedBookStr)
-        return storedBookData
+const getStoreBook=(key)=>{
+    const storedBook=JSON.parse(localStorage.getItem(key))
+    if (storedBook) {
+        // const storedBookData=JSON.parse(storedBookStr)
+        return storedBook
     }else{
         return []
     }
 }
 
-const addToStoredDB=(id)=>{
-    const storedBookData=getStoreBook()
+const addToStoredDB=(key,id)=>{
+    const storedBookData=getStoreBook(key)
     if (storedBookData.includes(id)) {
         alert('This book already add .........')
     }else{
         storedBookData.push(id)
-        console.log(storedBookData);
+        // console.log(storedBookData);
         const data=JSON.stringify(storedBookData)
-        localStorage.setItem('readList',data)
+        localStorage.setItem(key,data)
     }
 }
 
