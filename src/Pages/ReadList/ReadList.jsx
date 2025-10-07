@@ -4,32 +4,12 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { deleteStoreBook, getStoreBook } from '../../Utility/addtoDB';
 import { ShoppingBasket, Trash } from 'lucide-react';
+import useBookList from '../../Hooks/Hooks';
+
 
 const ReadList = () => {
-    const [read,setRead]=useState([]);
-    // const [read,setRead]=useState(()=>getStoreBook('readList'));
-    const [wishlist,setWishList]=useState([]);
-    const [sort,setSort]=useState('');
-    // console.log(read);
-    const [toggle,setToggle]=useState(true);
 
-    const data=useLoaderData()
-    // console.log(data);
-
- 
-
-useEffect(()=>{
-  const storedReadBook=getStoreBook('readList')|| [];
-  const storedWishListBook=getStoreBook('wishList')|| [];
-
-  const myReadList=data.filter(book=>storedReadBook.includes(book.bookId))
-
-  const myWishList=data.filter(book=>storedWishListBook.includes(book.bookId))
-
-  setRead(myReadList)
-
-  setWishList(myWishList)
-},[toggle,data])
+  const {read,wishlist,setToggle,toggle,setSort,setRead}=useBookList();
     // useEffect(()=>{
     //     const storedBookData=getStoreBook();
     //     // console.log(storedBookData);
@@ -60,7 +40,10 @@ setToggle(!toggle);
           setRead(sortedByPage)
         }
       }
-    
+
+
+
+
     return (
         <Tabs>
          <div className="dropdown dropdown-hover flex flex-col justify-center items-center">
@@ -105,11 +88,19 @@ setToggle(!toggle);
     
     
     }
-      
- 
+   
+    
+
 
 
     </TabPanel>
+
+
+
+
+
+
+
     <TabPanel>
       <h2> Wish list {wishlist.length}</h2>
       {

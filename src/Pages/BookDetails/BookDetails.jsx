@@ -117,7 +117,7 @@ const handleAsWishList=id=>{
   </table>
 </div>
       </div>
-        <div className='flex justify-between items-center  gap-2'>
+        <div className='flex items-center  gap-2'>
 
        <button onClick={()=>handleMarkAsRead (bookId)}
          className='btn btn-outline'>
